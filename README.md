@@ -101,29 +101,7 @@ spec:
 ```
 
 ### Setting up an existing vault (already initialized)
-If you have the existing unseal keys and the root token you can use them to setup the AWS SSM Parameter store.
-
-for the following procedeure use awscli.
-```$ pip install awscli```
-
-1. ```
-$ export AWS_REGION=<region>
-```
-2. run `aws kms list-aliases` to find the key id for the key you want to encrypt with.
-3. using the TargetKeyId, put the root token into the SSM
-```
-$ aws ssm put-parameter --name <Prefix>-vault-root --description "Vault Root Token" --type SecureString --key-id <target-key-id> --value <vault-root-token>
-```
-  
-Add each key (zero based 0-4 for 5 keys) like so:
-
 WIP
-
-```
-$ aws ssm put-parameter --name kubernetes-vault-unseal-0 --description "Vault Unseal <key number>" --type SecureString --key-id <target-key-id>  --value <unseal-key-num>
-```
-
-
 
 ### Initializing a vault.
 if your vault is not yet initialized you can initialized it using the parameter store as follow:
